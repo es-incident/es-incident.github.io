@@ -10,3 +10,6 @@ In late 2018, a supply chain attack targeting the Bitcoin Wallet app [Copay]() t
 
 The attack commenced firstly as a social engineering effort, as both event-stream and flatmap-stream were both non malicious npm packages on which (especially event-stream) [a large amount]() of packages depended on. A malicious user, @right9ctrl contacted the original author and maintainer of event-stream offering to make contributions to the package. The latter, after a few innocuous contributory commits by the user, gave them ownership of the package along with npm publishing rights. Soon after, the flatmap-stream dependency was introduced to event-stream. The malicious code appeared in a consequent version of flatmap-stream and moved downstream through event-stream (which now depends on flatmap-stream) to Copay.
 
+### Quick Jump
+
+[Payloads](https://es-incident.github.io/payloads) |
