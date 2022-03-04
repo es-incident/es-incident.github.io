@@ -667,3 +667,5 @@ the scale and complexity of dependencies used in modern applications.
     improve website performance.
 
 [^3]: Not to be confused with the malicious code payloads
+
+[back](./)
