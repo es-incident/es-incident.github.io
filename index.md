@@ -1,123 +1,12 @@
----
-layout: default
----
+# The anatomy of the event-stream attack
 
-Text can be **bold**, _italic_, or ~~strikethrough~~.
+_This article mainly serves to analyze the malicious code of the attack. For a more thorough analysis of the incident, please consult [this]() paper_
 
-[Link to another page](./another-page.html).
+### Introduction
 
-There should be whitespace between paragraphs.
+In late 2018, a supply chain attack targeting the Bitcoin Wallet app [Copay]() took place. The [npm]() package served as the host of the malicious code through its dependency [flatmap-stream](), another npm package. The malicious code reached the Copay application and affected several versions on end user's devices. The main attacking technique that was utilized was code injection. Over the next few sections we will be examining the malicious code that was used to carry out the attack.
 
-There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
+### The social engineering aspect of the attack
 
-# Header 1
+The attack commenced firstly as a social engineering effort, as both event-stream and flatmap-stream were both non malicious npm packages on which (especially event-stream) [a large amount]() of packages depended on. A malicious user, @right9ctrl contacted the original author and maintainer of event-stream offering to make contributions to the package. The latter, after a few innocuous contributory commits by the user, gave them ownership of the package along with npm publishing rights. Soon after, the flatmap-stream dependency was introduced to event-stream. The malicious code appeared in a consequent version of flatmap-stream and moved downstream through event-stream (which now depends on flatmap-stream) to Copay.
 
-This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
-
-## Header 2
-
-> This is a blockquote following a header.
->
-> When something is important enough, you do it even if the odds are not in your favor.
-
-### Header 3
-
-```js
-// Javascript code with syntax highlighting.
-var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l)
-  return true;
-}
-```
-
-```ruby
-# Ruby code with syntax highlighting
-GitHubPages::Dependencies.gems.each do |gem, version|
-  s.add_dependency(gem, "= #{version}")
-end
-```
-
-#### Header 4
-
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-
-##### Header 5
-
-1.  This is an ordered list following a header.
-2.  This is an ordered list following a header.
-3.  This is an ordered list following a header.
-
-###### Header 6
-
-| head1        | head two          | three |
-|:-------------|:------------------|:------|
-| ok           | good swedish fish | nice  |
-| out of stock | good and plenty   | nice  |
-| ok           | good `oreos`      | hmm   |
-| ok           | good `zoute` drop | yumm  |
-
-### There's a horizontal rule below this.
-
-* * *
-
-### Here is an unordered list:
-
-*   Item foo
-*   Item bar
-*   Item baz
-*   Item zip
-
-### And an ordered list:
-
-1.  Item one
-1.  Item two
-1.  Item three
-1.  Item four
-
-### And a nested list:
-
-- level 1 item
-  - level 2 item
-  - level 2 item
-    - level 3 item
-    - level 3 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-
-### Small image
-
-![Octocat](https://github.githubassets.com/images/icons/emoji/octocat.png)
-
-### Large image
-
-![Branching](https://guides.github.com/activities/hello-world/branching.png)
-
-
-### Definition lists can be used with HTML syntax.
-
-<dl>
-<dt>Name</dt>
-<dd>Godzilla</dd>
-<dt>Born</dt>
-<dd>1952</dd>
-<dt>Birthplace</dt>
-<dd>Japan</dd>
-<dt>Color</dt>
-<dd>Green</dd>
-</dl>
-
-```
-Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-```
-
-```
-The final element.
-```
