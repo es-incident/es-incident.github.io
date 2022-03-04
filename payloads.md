@@ -1,6 +1,7 @@
 ---
 layout: default
 title:  "Attack Payloads"
+description: "An in-depth look at the attack payloads"
 ---
 
 ### Payload A
