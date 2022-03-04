@@ -1,3 +1,9 @@
+---
+layout: default
+title:  "Full Paper"
+description: "The full paper text"
+---
+
 # Introduction
 
 In today's software development world, developers encapsulate and share
