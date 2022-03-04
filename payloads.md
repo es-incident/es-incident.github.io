@@ -546,4 +546,5 @@ transmits the user's private keys using the `r`{.js} function (lines
 On the last line, there's an `if` statement responsible for
 launching the script as soon as the user's device is ready (line 91).
 
+* * *
 [back](./)
