@@ -12,4 +12,4 @@ The attack commenced firstly as a social engineering effort, as both event-strea
 
 ### Quick Jump
 
-[Payloads](https://es-incident.github.io/payloads) | [Defence](https://es-incident.github.io/defences)
+[Paper](https://es-incident.github.io/paper) | [Payloads](https://es-incident.github.io/payloads) | [Defence](https://es-incident.github.io/defences)
