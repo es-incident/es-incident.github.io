@@ -245,3 +245,4 @@ There are two more nested callback functions defined in the remaining code.
 
 The last section of code intercepts and fake patches the getKeys function from the Credentials class. The patched version of it, reproduces the functions original result but it also checks the variable (which is essentially a hash table) used previously to flag each key. If it comes up positive, the variable is deleted to remove remaining traces and the users private keys are transmitted using the "requestPrep" function. Lastly, on the last line, there's an if statement responsible for launching the script as soon as the device is ready (on mobile versions) or instantly (desktop).
 
+[back](./)
