@@ -1,3 +1,8 @@
+---
+layout: default
+title:  "Attack Payloads"
+---
+
 ### Payload A
 
 [This](https://raw.githubusercontent.com/andromeda/e-s/master/source/flatmap-stream%400.1.0_index.min.js?token=AN3TTKWZEDLTHZ7GXYICZZC6DDSJA) is what the raw (and minified) source code of flatmap-stream 0.1.0 looks like.
