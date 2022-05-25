@@ -68,4 +68,4 @@ further accidents of a similar kind in the future.
 
 ### Quick Jump
 
-[Full Paper Text](https://es-incident.github.io/paper) - [Payloads](https://es-incident.github.io/payloads) - [Defences](https://es-incident.github.io/defences)
+[Full Paper Text](https://es-incident.github.io/paper) - [Payloads](https://es-incident.github.io/payloads) 
